@@ -36,11 +36,11 @@ namespace Registration.Application.Features.AccountFeatures.Commands.CreateAccou
             RuleFor(a => a.MobileNumber)
                 .NotEmpty().WithMessage("Mobile is required")
                 .Matches(@"^\+201\d{9}$").WithMessage("Mobile number should be in the format +021 165 1581234")
-                .Must(EmailUnique).WithMessage("There is another account with the same email.");
+                .Must(MobileNumberUnique).WithMessage("There is another account with the same Mobile Number.");
 
             RuleFor(a => a.Email)
             .EmailAddress().WithMessage("Please enter a valid email address.")
-            .Must(MobileNumberUnique).WithMessage("There is another account with the same Mobile Number.");
+            .Must(EmailUnique).WithMessage("There is another account with the same E-mail.");
 
             RuleForEach(a => a.Addresses)
             .SetValidator(new CreateAccountCommandAddressValidator());
